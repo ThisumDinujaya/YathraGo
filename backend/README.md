@@ -18,10 +18,6 @@ YathraGo is a comprehensive transport management system backend built with moder
 ### Database & ORM
 - **PostgreSQL** - Advanced open-source relational database
 - **Prisma ORM** - Next-generation ORM for Node.js and TypeScript
-  - Type-safe database client
-  - Database migrations
-  - Database introspection
-  - Query builder with IntelliSense
 
 ### Authentication & Security
 - **JWT (JSON Web Tokens)** - Secure token-based authentication
@@ -34,17 +30,6 @@ YathraGo is a comprehensive transport management system backend built with moder
 ### File Handling & HTTP
 - **Multer** - Node.js middleware for handling multipart/form-data (file uploads)
 - **Axios** - Promise-based HTTP client for making API requests
-
-### Development & Testing
-- **Jest** - JavaScript testing framework
-- **ESLint** - Code linting and style enforcement
-- **Prettier** - Code formatting
-- **SWC** - Fast TypeScript/JavaScript compiler
-
-### Additional Utilities
-- **UUID** - Unique identifier generation
-- **RxJS** - Reactive extensions for JavaScript
-- **js-cookie** - Cookie handling utilities
 
 ## Architecture Features
 
@@ -73,7 +58,7 @@ YathraGo is a comprehensive transport management system backend built with moder
 - Node.js (v18 or higher)
 - npm or yarn
 - PostgreSQL database
-- Twilio account (for SMS functionality)
+- [SMSGate](https://sms-gate.app) mobile app (for SMS functionality)
 
 ## Environment Setup
 
@@ -87,6 +72,16 @@ DIRECT_URL="postgresql://username:password@localhost:5432/yathrago"
 # JWT
 JWT_SECRET="your-jwt-secret-key"
 JWT_EXPIRES_IN="7d"
+
+# SMS Configuration
+SMS_PROVIDER="dummy"  # Options: "dummy", "smsgate"
+
+# SMS-Gate Configuration (only needed if SMS_PROVIDER=smsgate)
+# Get these credentials from your SMS-Gate app's Home screen
+SMSGATE_USERNAME="sms"
+SMSGATE_PASSWORD="password"
+SMSGATE_BASE_URL="http://YOUR_PHONE_IP:8080"
+SMSGATE_SIM_NUMBER=1  # Optional: 1 or 2 for dual SIM devices (leave empty to use default SIM)
 
 # Other configurations
 PORT=3000
@@ -154,61 +149,6 @@ npx prisma db pull
 npx prisma db push
 ```
 
-## Testing
-
-```bash
-# Unit tests
-npm run test
-
-# E2E tests
-npm run test:e2e
-
-# Test coverage
-npm run test:cov
-
-# Watch mode
-npm run test:watch
-```
-
-## Code Quality
-
-```bash
-# Lint code
-npm run lint
-
-# Format code
-npm run format
-```
-
-## API Endpoints
-
-### Authentication
-- `POST /auth/register` - User registration
-- `POST /auth/login` - User login
-- `POST /auth/verify-phone` - Phone verification
-- `POST /auth/send-otp` - Send OTP
-- `POST /auth/refresh` - Refresh JWT token
-
-### User Management
-- `GET /user/profile` - Get user profile
-- `PUT /user/profile` - Update user profile
-- `POST /user/upload-avatar` - Upload profile picture
-
-### Customer Operations
-- `GET /customer/vehicles` - Get available vehicles
-- `POST /customer/booking` - Create booking
-- `GET /customer/bookings` - Get user bookings
-
-### Driver Operations
-- `GET /driver/profile` - Get driver profile
-- `PUT /driver/status` - Update driver status
-- `GET /driver/bookings` - Get driver bookings
-
-### Vehicle Management
-- `POST /vehicle/register` - Register vehicle
-- `GET /vehicle/list` - Get vehicles
-- `PUT /vehicle/update` - Update vehicle details
-
 ## Project Structure
 
 ```
@@ -227,53 +167,6 @@ src/
 └── main.ts            # Application entry point
 ```
 
-## Database Schema
-
-The application uses PostgreSQL with Prisma ORM. Key entities include:
-
-- **User** - Base user information
-- **Customer** - Customer-specific data
-- **Driver** - Driver profiles and status
-- **Owner** - Vehicle owner information
-- **Vehicle** - Vehicle details and specifications
-- **Booking** - Ride booking information
-- **OtpCode** - OTP verification codes
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
-
-## Deployment
-
-### Environment Variables for Production
-
-Ensure all environment variables are properly set in your production environment:
-
-- Database connection strings
-- JWT secrets
-- Twilio credentials
-- Any other service API keys
-
-### Build for Production
-
-```bash
-npm run build
-npm run start:prod
-```
-
-## Support
-
-For questions and support regarding the YathraGo backend:
-
-1. Check the API documentation at `/api` endpoint
-2. Review the codebase documentation
-3. Contact the development team
-
 ## License
 
-This project is proprietary software. All rights reserved.
+This project is part of the YathraGo ecosystem.
